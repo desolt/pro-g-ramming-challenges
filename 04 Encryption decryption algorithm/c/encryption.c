@@ -5,6 +5,8 @@
 
 #define MAX_INPUT_SIZE 256
 
+#define decrypt(input, key, output) encrypt(input, (26-(key)), output)
+
 size_t create_output(char *input, char **output)
 {
     size_t len = strlen(input);
@@ -26,22 +28,6 @@ void encrypt(char *input, int key, char **output)
                 ch -= 26;
         }
 
-        (*output)[i] = ch;
-    }
-}
-
-void decrypt(char *input, int key, char **output)
-{
-    size_t len = create_output(input, output);
-
-    for (size_t i = 0; i < len; i++) {
-        char ch = input[i];
-        if (isalpha(ch)) {
-            ch -= key;
-            if (!isalpha(ch))
-                ch += 26;
-        }
-        
         (*output)[i] = ch;
     }
 }
